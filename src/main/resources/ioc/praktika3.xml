@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- praktika -->
+    <bean id="helloworld" class="com.heyatiminkodlar.ioc.praktika.DunyayaSalam"></bean>
+
+    <!-- praktika3 -->
+    <bean id="user1" class="com.heyatiminkodlar.ioc.praktika3.user.User">
+        <property name="id" value="12"></property>
+        <property name="name" value="Cavad"></property>
+    </bean>
+    <bean id="user1Dao" class="com.heyatiminkodlar.ioc.praktika3.dao.UserDao"></bean>
+    <bean id="user1JDBCDao" class="com.heyatiminkodlar.ioc.praktika3.dao.UserJDBCDao"></bean>
+    <bean id="user1Service" class="com.heyatiminkodlar.ioc.praktika3.service.UserService" autowire="byType">
+        <property name="userDao" ref="user1Dao"></property>
+    </bean>
+
+<!--
+    <bean id="userAction" class="UserAction" scope="prototype">
+        <constructor-arg ref="userService"></constructor-arg>
+    </bean>
+-->
+
+    <bean id="user1Action" class="com.heyatiminkodlar.ioc.praktika3.action.UserAction" scope="prototype" autowire="byType">
+        <property name="userService" ref="user1Service"/>
+        <property name="user" ref="user1"/>
+        <property name="id" value="12"/>
+        <property name="names">
+            <list>
+                <value>ccc</value>
+                <value>aaa</value>
+                <value>vvv</value>
+                <value>aaa</value>
+                <value>ddd</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+
+</beans>
